@@ -1,15 +1,20 @@
 <template>
-  <hello-world />
+  <div>
+    <ItunesSearch />
+    <ItunesAlbums />
+  </div>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+import ItunesSearch from "../components/ItunesSearch";
+import ItunesAlbums from "../components/ItunesAlbums";
 
-  export default {
-    name: 'Home',
+export default {
+  name: "Home",
 
-    components: {
-      HelloWorld,
-    },
-  }
+  components: {
+    ItunesSearch,
+    ItunesAlbums,
+  },
+};
 </script>
