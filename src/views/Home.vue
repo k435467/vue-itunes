@@ -1,7 +1,9 @@
 <template>
   <div>
     <ItunesSearch />
-    <ItunesAlbums />
+    <div class="albums">
+      <ItunesAlbums />
+    </div>
   </div>
 </template>
 
@@ -18,3 +20,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.albums {
+  display: flex;
+  justify-content: center;
+}
+</style>

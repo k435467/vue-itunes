@@ -1,8 +1,13 @@
 <template>
-  <div>
-    <p>ItunesAlbums</p>
-    <div v-for="album in albums" :key="album.collectionId">
-      {{ album.collectionName }}
+  <div class="blocks-container">
+    <div v-for="album in albums" :key="album.collectionId" class="info-container">
+      <v-img :src="album.artworkUrl100" max-height="60" max-width="60"></v-img>
+      <div>
+        <div>{{ album.collectionType }}</div>
+        <div>{{ album.collectionName }}</div>
+        <div>{{ album.artistName }}</div>
+        <div>{{ album.collectionPrice + album.currency }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -27,9 +32,10 @@ export default {
   methods: {
     fetchData: async function () {
       // use keyword to search
-      if (this.searchKeyword !== "") {
+      if (this.searchKeyword) {
         const tmp = await itunesSearch(this.searchKeyword);
         this.albums = tmp.results;
+        console.log(this.albums);
       }
     },
   },
@@ -43,3 +49,17 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.blocks-container {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-container {
+  display: flex;
+  width: 400px;
+}
+</style>

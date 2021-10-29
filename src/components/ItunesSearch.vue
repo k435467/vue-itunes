@@ -1,16 +1,11 @@
 <template>
-  <div>
-    <div class="my-container">
-      <v-text-field
-        label="Keyword"
-        v-model="searchKeyword"
-        class="search-input"
-      ></v-text-field>
-      <v-btn outlined class="ml-2" @click="clickSearch">Search</v-btn>
-    </div>
-    <div>
-      {{ searchKeyword }}
-    </div>
+  <div class="my-container">
+    <v-text-field
+      label="Keyword"
+      v-model="searchKeyword"
+      class="search-input"
+    ></v-text-field>
+    <v-btn outlined class="ml-2" @click="clickSearch">Search</v-btn>
   </div>
 </template>
 
