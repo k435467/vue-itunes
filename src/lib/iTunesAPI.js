@@ -1,7 +1,7 @@
 export const itunesSearch = async function (search) {
   try {
     return await fetch(
-      `https://itunes.apple.com/search?term=${search}&entity=album&limit=25`
+      `https://itunes.apple.com/search?term=${search}&entity=album`
     ).then((res) => res.json());
   } catch (e) {
     console.error("itunesSearch failed!");

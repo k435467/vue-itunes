@@ -1,6 +1,13 @@
 <template>
   <div class="blocks-container">
-    <div v-for="album in albums" :key="album.collectionId">
+    <v-pagination
+      v-if="showPagination"
+      v-model="curPage"
+      :length="totalPages"
+      color="black"
+      class="pb-6"
+    ></v-pagination>
+    <div v-for="album in curAlbums" :key="album.collectionId">
       <a :href="album.collectionViewUrl" target="_blank">
         <div class="info-container border-block">
           <div class="img-block">
@@ -19,11 +26,20 @@
         </div>
       </a>
     </div>
+    <v-pagination
+      v-if="showPagination"
+      v-model="curPage"
+      :length="totalPages"
+      color="black"
+      class="py-6"
+    ></v-pagination>
   </div>
 </template>
 
 <script>
 import { itunesSearch } from "../lib/iTunesAPI";
+
+const pageSize = 10;
 
 export default {
   name: "ItunesAlbums",
@@ -31,12 +47,28 @@ export default {
   data: () => ({
     searchKeyword: "",
     albums: [],
+    curPage: 1,
   }),
 
   created: function () {
     // Get searchKeyword from route and fetch data
     this.searchKeyword = this.$route.query.searchKeyword;
     this.fetchData();
+  },
+
+  computed: {
+    showPagination: function () {
+      return this.albums.length > pageSize;
+    },
+    totalPages: function () {
+      return Math.ceil(this.albums.length / pageSize);
+    },
+    curAlbums: function () {
+      return this.albums.slice(
+        (this.curPage - 1) * pageSize,
+        (this.curPage - 1) * pageSize + pageSize
+      );
+    },
   },
 
   methods: {
@@ -70,6 +102,8 @@ export default {
 .info-container {
   display: flex;
   padding: 10px;
+  max-width: 800px;
+  min-width: 200px;
 }
 
 .border-block {
