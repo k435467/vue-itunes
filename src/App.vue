@@ -29,23 +29,7 @@
 </template>
 
 <script>
-// import { itunesSearch } from "./lib/iTunesAPI";
-
 export default {
   name: "App",
-
-  data: () => ({
-    response: {},
-  }),
-
-  // created: async function () {
-  //   this.response = await itunesSearch("tylor");
-  //   console.log(this.response);
-  //   window.tmp = this.response;
-  // },
-
-  // mounted: function () {
-  //   //
-  // },
 };
 </script>

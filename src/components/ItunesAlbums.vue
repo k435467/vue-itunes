@@ -87,6 +87,7 @@ export default {
     $route: function (to, from) {
       // fetch data again when route changed
       this.searchKeyword = to.query.searchKeyword;
+      this.curPage = 1;
       this.fetchData();
     },
   },
