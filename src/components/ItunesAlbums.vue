@@ -11,7 +11,9 @@
             <div class="black-text">{{ album.collectionName }}</div>
             <div class="sec-text">{{ album.artistName }}</div>
             <div class="sec-text pt-4">
-              {{ album.collectionPrice + " " + album.currency }}
+              {{
+                album.collectionPrice ? album.collectionPrice + " " + album.currency : ""
+              }}
             </div>
           </div>
         </div>
@@ -41,8 +43,10 @@ export default {
     fetchData: async function () {
       // use keyword to search
       if (this.searchKeyword) {
+        this.$store.commit("setLoading", true);
         const tmp = await itunesSearch(this.searchKeyword);
         this.albums = tmp.results;
+        this.$store.commit("setLoading", false);
       }
     },
   },
@@ -84,6 +88,8 @@ export default {
   padding-right: 30px;
   display: flex;
   align-items: center;
+  width: 140px;
+  height: 120px;
 }
 
 .black-text {
