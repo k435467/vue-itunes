@@ -1,13 +1,21 @@
 <template>
   <div class="blocks-container">
-    <div v-for="album in albums" :key="album.collectionId" class="info-container">
-      <v-img :src="album.artworkUrl100" max-height="60" max-width="60"></v-img>
-      <div>
-        <div>{{ album.collectionType }}</div>
-        <div>{{ album.collectionName }}</div>
-        <div>{{ album.artistName }}</div>
-        <div>{{ album.collectionPrice + album.currency }}</div>
-      </div>
+    <div v-for="album in albums" :key="album.collectionId">
+      <a :href="album.collectionViewUrl" target="_blank">
+        <div class="info-container border-block">
+          <div class="img-block">
+            <v-img :src="album.artworkUrl100" max-height="100" max-width="100"></v-img>
+          </div>
+          <div>
+            <div class="sec-text pb-2 pt-2">{{ album.collectionType }}</div>
+            <div class="black-text">{{ album.collectionName }}</div>
+            <div class="sec-text">{{ album.artistName }}</div>
+            <div class="sec-text pt-4">
+              {{ album.collectionPrice + " " + album.currency }}
+            </div>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 </template>
@@ -35,7 +43,6 @@ export default {
       if (this.searchKeyword) {
         const tmp = await itunesSearch(this.searchKeyword);
         this.albums = tmp.results;
-        console.log(this.albums);
       }
     },
   },
@@ -52,14 +59,47 @@ export default {
 
 <style scoped>
 .blocks-container {
-  max-width: 500px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .info-container {
   display: flex;
-  width: 400px;
+  padding: 10px;
+}
+
+.border-block {
+  transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  border: 1px solid transparent;
+}
+
+.border-block:hover {
+  border: 1px solid #d9d9d9;
+  transform: scale(1.15);
+  box-shadow: 3px 3px 3px #b3b3b3;
+}
+
+.img-block {
+  padding: 10px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.black-text {
+  color: black;
+}
+
+.sec-text {
+  font-size: small;
+  color: grey;
+}
+
+a,
+a:hover,
+a:visited,
+a:active {
+  color: inherit;
+  text-decoration: none;
 }
 </style>

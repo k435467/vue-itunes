@@ -32,9 +32,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: baseline;
+  flex-wrap: wrap;
 }
 
 .search-input {
   max-width: 400px;
+  min-width: 200px;
 }
 </style>
